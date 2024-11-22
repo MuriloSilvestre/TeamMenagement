@@ -1,0 +1,10 @@
+.config-content {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  height: 81vh;
+  width: 98vw;
+}
+.config-content * {
+  width: 100%;
+}

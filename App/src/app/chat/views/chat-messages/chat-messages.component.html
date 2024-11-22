@@ -1,0 +1,39 @@
+<div class="messages-container">
+  <div class="message-content" #container>
+    <div
+      *ngFor="let message of messages"
+      [style]="'border: 2px solid ' + message.user?.color"
+      [ngClass]="message.user?.name == token.name ? 'user-message' : 'message'"
+    >
+      <small [style.color]="message.user?.color">
+        {{ message.user?.name }}:</small
+      >
+      <pre>{{ message.content }}</pre>
+      <span class="timestamp">{{ message.timestamp | date : "short" }}</span>
+    </div>
+  </div>
+
+  <form [formGroup]="messageService.basicForm" class="message-form">
+    <div class="form-group">
+      <textarea
+        type="text"
+        id="content"
+        formControlName="content"
+        [disabled]="!chat"
+        placeholder=""
+        [ngClass]="{
+          'is-invalid':
+            messageService.basicForm.controls['content'].invalid &&
+            messageService.basicForm.controls['content'].touched
+        }"
+      ></textarea>
+    </div>
+    <button
+      type="submit"
+      [disabled]="messageService.basicForm.invalid || !chat"
+      (click)="ngOnSubmit()"
+    >
+      <span class="material-icons">send</span>
+    </button>
+  </form>
+</div>

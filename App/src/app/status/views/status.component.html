@@ -1,0 +1,69 @@
+<div class="sub-main">
+  <app-header-content [title]="'Status'"> </app-header-content>
+  <div class="status-content">
+    <form [formGroup]="statusService.basicForm" class="sub-form">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Digite um nome para a Funções"
+          [ngClass]="{
+            'is-invalid':
+              statusService.basicForm.controls['name'].invalid &&
+              statusService.basicForm.controls['name'].touched
+          }"
+        />
+        <div
+          *ngIf="
+            statusService.basicForm.controls['name'].invalid &&
+            statusService.basicForm.controls['name'].touched
+          "
+          class="error-message"
+        >
+          A nome é obrigatória.
+        </div>
+      </div>
+      <div class="sub-form-actions">
+        <button type="button" (click)="onCancel()">Cancelar</button>
+        <button
+          type="submit"
+          [disabled]="
+            statusService.basicForm.invalid || action() == 'Visualizar'
+          "
+          (click)="ngOnSubmit()"
+        >
+          {{ action() }}
+        </button>
+      </div>
+    </form>
+    <app-small-paginador-list
+      [lista]="PaginatedStatus"
+      [propriedades]="['Nome']"
+      [itensPorPagina]="ItemsPerPage"
+      [acoesTemplate]="acoes"
+      [nextPageFunction]="NextPage"
+      [prevPageFunction]="PrevPage"
+      [totalPaginas]="TotalPages"
+      [paginaAtual]="CurrentPage"
+    >
+    </app-small-paginador-list>
+
+    <ng-template #acoes let-item="item">
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="Crud(item.Id, 'Editar')">
+          <span class="material-icons">edit</span>
+        </button>
+        <span class="tooltip">Editar</span>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="Remove(item.Id)">
+          <span class="material-icons">delete</span>
+        </button>
+        <span class="tooltip">Deletar</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<app-modal-crud [title]="action() + ' Equipes'">
+  <form [formGroup]="teamService.basicForm">
+    <app-tabs>
+      <app-tab title="Principal">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">
+              Título
+              {{ teamService.basicForm.controls["name"].validator ? "*" : "" }}
+            </label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Digite o nome da Equipes"
+              [ngClass]="{
+                'is-invalid':
+                  teamService.basicForm.controls['name'].invalid &&
+                  teamService.basicForm.controls['name'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                teamService.basicForm.controls['name'].invalid &&
+                teamService.basicForm.controls['name'].touched
+              "
+              class="error-message"
+            >
+              O título é obrigatório.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="color">
+              Cor
+              {{ teamService.basicForm.controls["color"].validator ? "*" : "" }}
+            </label>
+            <input
+              id="color"
+              type="color"
+              formControlName="color"
+              [ngClass]="{
+                'is-invalid':
+                  teamService.basicForm.controls['color'].invalid &&
+                  teamService.basicForm.controls['color'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                teamService.basicForm.controls['color'].invalid &&
+                teamService.basicForm.controls['color'].touched
+              "
+              class="error-message"
+            >
+              A cor é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">
+              Descrição
+              {{
+                teamService.basicForm.controls["description"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Digite a descrição da tarefa"
+              [ngClass]="{
+                'is-invalid':
+                  teamService.basicForm.controls['description'].invalid &&
+                  teamService.basicForm.controls['description'].touched
+              }"
+            ></textarea>
+            <div
+              *ngIf="
+                teamService.basicForm.controls['description'].invalid &&
+                teamService.basicForm.controls['description'].touched
+              "
+              class="error-message"
+            >
+              A descrição é obrigatória.
+            </div>
+          </div>
+        </div>
+      </app-tab>
+      <app-tab title="Usuários" *ngIf="teamId > 0">
+        <div class="form-row">
+          <div class="form-group" style="width: 18%">
+            <label for="userId"> Usuários* </label>
+            <select
+              id="userId"
+              [(ngModel)]="userId"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="addUser()"
+            >
+              <option [value]="0">-- Selecione uma opção --</option>
+              <option *ngFor="let user of Users" [value]="user.id">
+                {{ user.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <app-list
+          [lista]="paginatedUsers"
+          [propriedades]="['Nome']"
+          [acoesTemplate]="acoes"
+        >
+        </app-list>
+        <ng-template #acoes let-item="item">
+          <div class="action-btn-wrapper">
+            <button class="action-bnt" (click)="onDeleteTeam(item.Id)">
+              <span class="material-icons">delete</span>
+            </button>
+            <span class="tooltip">Deletar</span>
+          </div>
+        </ng-template>
+      </app-tab>
+    </app-tabs>
+  </form>
+  <div class="form-actions">
+    <button type="button" (click)="onCancel()">Cancelar</button>
+    <button
+      type="submit"
+      [disabled]="teamService.basicForm.invalid || action() == 'Visualizar'"
+      (click)="ngOnSubmit()"
+    >
+      {{ action() }}
+    </button>
+  </div>
+</app-modal-crud>

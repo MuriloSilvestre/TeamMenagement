@@ -1,0 +1,12 @@
+C:\updateNet5ToNet6\src\Api.Domain\bin\Debug\net6.0\Domain.deps.json
+C:\updateNet5ToNet6\src\Api.Domain\bin\Debug\net6.0\Domain.dll
+C:\updateNet5ToNet6\src\Api.Domain\bin\Debug\net6.0\Domain.pdb
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.dll
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\refint\Domain.dll
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\Domain.pdb
+C:\updateNet5ToNet6\src\Api.Domain\obj\Debug\net6.0\ref\Domain.dll

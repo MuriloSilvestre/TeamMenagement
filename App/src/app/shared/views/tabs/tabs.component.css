@@ -1,0 +1,31 @@
+.tabs {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.tab-titles {
+  display: flex;
+  padding: 0 16px;
+  border-bottom: 2px solid #000000;
+}
+.tab-titles div {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: none;
+  border: 1px solid transparent;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Fundo branco com transparência */
+  border-radius: 8px;
+}
+.tab-titles div.active {
+  border-color: #000000;
+  border-bottom: 2px solid white;
+  font-weight: bold;
+}

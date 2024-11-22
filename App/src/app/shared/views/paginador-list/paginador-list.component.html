@@ -1,0 +1,39 @@
+<div Class="paginator-list">
+  <table *ngIf="itensPaginados.length > 0; else listaVazia">
+    <thead>
+      <tr>
+        <th *ngFor="let prop of propriedades">{{ prop }}</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of itensPaginados">
+        <td *ngFor="let prop of propriedades">{{ getValor(item, prop) }}</td>
+        <td class="action">
+          <ng-container
+            *ngTemplateOutlet="acoesTemplate; context: { item: item }"
+          ></ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #listaVazia>
+    <div class="mensagem-vazia">
+      <p>Nenhum item encontrado.</p>
+    </div>
+  </ng-template>
+
+  <div class="paginator">
+    <button (click)="mudarPaginaAnterior()" [disabled]="paginaAtual === 1">
+      Anterior
+    </button>
+    <span>Página {{ paginaAtual }} de {{ totalPaginas }}</span>
+    <button
+      (click)="mudarPaginaProxima()"
+      [disabled]="paginaAtual === totalPaginas"
+    >
+      Próxima
+    </button>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<app-profile-crud
+  [userId]="SelectedUserId"
+  (closeModal)="OnModalClose()"
+></app-profile-crud>
+
+<div class="main">
+  <app-header-content [title]="'Perfil'">
+    <button class="add-button" (click)="Crud(user.id!, 'Editar')">
+      Editar Usuários
+    </button>
+  </app-header-content>
+  <div class="profile-content">
+    <span>
+      <small>E-Mail:</small> <strong>{{ user ? user.email : "" }}</strong>
+    </span>
+    <span>
+      <small>Nome:</small> <strong>{{ user ? user.name : "" }}</strong>
+    </span>
+    <span>
+      <small>Função:</small> <strong>{{ user ? user.role!.name : "" }}</strong>
+    </span>
+    <button class="btn-action" (click)="mudarSenha = !mudarSenha">
+      Mudar Senha
+    </button>
+
+    <form
+      [formGroup]="userService.passwordForm"
+      *ngIf="mudarSenha == true"
+      class="mudar-senha"
+    >
+      <div class="form-group">
+        <label for="password">Digite sua senha atual</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Digite sua senha atual"
+          [ngClass]="{
+            'is-invalid':
+              userService.passwordForm.controls['password'].invalid &&
+              userService.passwordForm.controls['password'].touched
+          }"
+        />
+        <div
+          *ngIf="
+            userService.passwordForm.controls['password'].invalid &&
+            userService.passwordForm.controls['password'].touched
+          "
+          class="error-message"
+        >
+          A senha atual é obrigatória.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordNew">Digite a nova senha</label>
+        <input
+          type="password"
+          id="passwordNew"
+          formControlName="newPassword"
+          placeholder="Digite a nova senha"
+          [ngClass]="{
+            'is-invalid':
+              userService.passwordForm.controls['newPassword'].invalid &&
+              userService.passwordForm.controls['newPassword'].touched
+          }"
+        />
+        <div
+          *ngIf="
+            userService.passwordForm.controls['newPassword'].invalid &&
+            userService.passwordForm.controls['newPassword'].touched
+          "
+          class="error-message"
+        >
+          A nova senha é obrigatória.
+        </div>
+      </div>
+
+      <!-- Botões de Cancelar e Salvar -->
+      <div class="footer">
+        <button class="btn-cancel" (click)="clean()">Cancelar</button>
+        <button
+          class="btn-save"
+          [disabled]="userService.passwordForm.invalid"
+          (click)="salvarNovaSenha()"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

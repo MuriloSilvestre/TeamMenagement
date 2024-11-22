@@ -1,0 +1,35 @@
+<div class="calendar">
+  <div class="header">
+    <button (click)="previousMonth()">&lt;</button>
+    <span>{{ months[currentMonth] }}/{{ currentYear }}</span>
+    <button (click)="nextMonth()">&gt;</button>
+  </div>
+  <div class="day-names">
+    <span class="calendar-div">Domingo</span>
+    <span class="calendar-div">Segunda</span>
+    <span class="calendar-div">Terça</span>
+    <span class="calendar-div">Quarta</span>
+    <span class="calendar-div">Quinta</span>
+    <span class="calendar-div">Sexta</span>
+    <span class="calendar-div">Sabado</span>
+  </div>
+  <div class="days">
+    <div
+      class="calendar-div"
+      *ngFor="let day of daysInMonth"
+      [class.empty]="!day"
+    >
+      <span>
+        {{ day || "" }}{{ actionTemplate }}
+        <ng-container *ngIf="actionTemplate">
+          <ng-container *ngTemplateOutlet="actionTemplate"></ng-container>
+        </ng-container>
+      </span>
+      <div *ngIf="day && getEventForDay(day) as event">
+        <div class="event-tag" [style.background]="event.color">
+          {{ event.name }} - {{ event.status }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

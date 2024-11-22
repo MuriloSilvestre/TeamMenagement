@@ -1,0 +1,177 @@
+<app-modal-crud [title]="action() + ' Tarefa'">
+  <form [formGroup]="taskService.basicForm">
+    <app-tabs>
+      <app-tab title="Principal">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">
+              Título
+              {{ taskService.basicForm.controls["title"].validator ? "*" : "" }}
+            </label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Digite o título da tarefa"
+              [ngClass]="{
+                'is-invalid':
+                  taskService.basicForm.controls['title'].invalid &&
+                  taskService.basicForm.controls['title'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                taskService.basicForm.controls['title'].invalid &&
+                taskService.basicForm.controls['title'].touched
+              "
+              class="error-message"
+            >
+              O título é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group" style="width: 18%">
+            <label for="isCompleted">
+              Status
+              {{
+                taskService.basicForm.controls["isCompleted"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <select
+              id="isCompleted"
+              [(ngModel)]="IsCompleted"
+              formControlName="isCompleted"
+            >
+              <option [value]="''">-- Selecione uma opção --</option>
+              <option [value]="false">Pendente</option>
+              <option [value]="true">Concluída</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dueDate">
+              Data de Vencimento
+              {{
+                taskService.basicForm.controls["dueDate"].validator ? "*" : ""
+              }}
+            </label>
+            <input
+              id="dueDate"
+              type="date"
+              formControlName="dueDate"
+              [ngClass]="{
+                'is-invalid':
+                  taskService.basicForm.controls['dueDate'].invalid &&
+                  taskService.basicForm.controls['dueDate'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                taskService.basicForm.controls['dueDate'].invalid &&
+                taskService.basicForm.controls['dueDate'].touched
+              "
+              class="error-message"
+            >
+              A data de vencimento é obrigatória.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="assignedToUserId">
+              Usuário
+              {{
+                taskService.basicForm.controls["assignedToUserId"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <select
+              id="assignedToUserId"
+              [(ngModel)]="assignedToUserId"
+              formControlName="assignedToUserId"
+            >
+              <option [value]="0">-- Selecione uma opção --</option>
+              <option *ngFor="let user of users" [value]="user.id">
+                {{ user.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="color">
+              Cor
+              {{ taskService.basicForm.controls["color"].validator ? "*" : "" }}
+            </label>
+            <input
+              id="color"
+              type="color"
+              formControlName="color"
+              [ngClass]="{
+                'is-invalid':
+                  taskService.basicForm.controls['color'].invalid &&
+                  taskService.basicForm.controls['color'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                taskService.basicForm.controls['color'].invalid &&
+                taskService.basicForm.controls['color'].touched
+              "
+              class="error-message"
+            >
+              A cor é obrigatória.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">
+              Descrição
+              {{
+                taskService.basicForm.controls["description"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Digite a descrição da tarefa"
+              [ngClass]="{
+                'is-invalid':
+                  taskService.basicForm.controls['description'].invalid &&
+                  taskService.basicForm.controls['description'].touched
+              }"
+            ></textarea>
+            <div
+              *ngIf="
+                taskService.basicForm.controls['description'].invalid &&
+                taskService.basicForm.controls['description'].touched
+              "
+              class="error-message"
+            >
+              A descrição é obrigatória.
+            </div>
+          </div>
+        </div>
+      </app-tab>
+    </app-tabs>
+
+    <div class="form-actions">
+      <button type="button" (click)="onCancel()">Cancelar</button>
+      <button
+        type="submit"
+        [disabled]="taskService.basicForm.invalid || action() == 'Visualizar'"
+        (click)="ngOnSubmit()"
+      >
+        {{ action() }}
+      </button>
+    </div>
+  </form>
+</app-modal-crud>

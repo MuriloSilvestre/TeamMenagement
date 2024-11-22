@@ -1,0 +1,38 @@
+<div class="kanban-board">
+  <div
+    class="kanban-column"
+    [ngStyle]="{ 'background-color': column.color }"
+    *ngFor="let column of columns"
+  >
+    <div
+      class="kanban-header"
+      [ngStyle]="{ border: '2px solid' + column.color, color: column.color }"
+    >
+      <h2>{{ column.title }}</h2>
+    </div>
+
+    <div
+      class="kanban-items"
+      (drop)="drop($event, column)"
+      (dragover)="allowDrop($event)"
+    >
+      <div
+        class="kanban-item"
+        *ngFor="let item of column.items"
+        draggable="true"
+        (dragstart)="dragStart($event, item, column)"
+        [ngStyle]="{ border: '2px solid' + item.color }"
+      >
+        <h3>{{ item.title }}</h3>
+        <p class="status">Status: {{ item.status }}</p>
+        <span> Data: {{ item.date | date : "dd/MM/yyyy" }}</span>
+        <div class="actions">
+          <ng-container
+            *ngTemplateOutlet="acoesTemplate; context: { item: item }"
+          >
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

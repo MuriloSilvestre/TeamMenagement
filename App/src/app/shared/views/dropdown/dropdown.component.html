@@ -1,0 +1,9 @@
+<div class="dropdown">
+  <button (click)="toggleDropdown()" class="dropdown-toggle">
+    {{ title }}
+  </button>
+
+  <div *ngIf="isOpen" class="dropdown-menu">
+    <ng-content></ng-content>
+  </div>
+</div>

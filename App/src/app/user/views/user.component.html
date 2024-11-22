@@ -1,0 +1,43 @@
+<app-user-crud [userId]="SelectedUserId" (closeModal)="OnModalClose()" />
+
+<div class="main">
+  <app-header-content [title]="'Usuário'">
+    <button class="add-button" (click)="Crud(0, 'Cadastrar')">
+      Adicionar Usuários
+    </button>
+  </app-header-content>
+
+  <app-paginador-list
+    [lista]="PaginatedUsers"
+    [propriedades]="['Nome', 'Email']"
+    [itensPorPagina]="ItemsPerPage"
+    [acoesTemplate]="acoes"
+    [nextPageFunction]="NextPage"
+    [prevPageFunction]="PrevPage"
+    [totalPaginas]="TotalPages"
+    [paginaAtual]="CurrentPage"
+  >
+  </app-paginador-list>
+  <ng-template #acoes let-item="item">
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="Crud(item.Id, 'Visualizar')">
+        <span class="material-icons">visibility</span>
+      </button>
+      <span class="tooltip">Visualizar</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="Crud(item.Id, 'Editar')">
+        <span class="material-icons">edit</span>
+      </button>
+      <span class="tooltip">Editar</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="Remove(item.Id)">
+        <span class="material-icons">delete</span>
+      </button>
+      <span class="tooltip">Deletar</span>
+    </div>
+  </ng-template>
+</div>

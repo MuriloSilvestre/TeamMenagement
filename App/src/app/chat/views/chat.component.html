@@ -1,0 +1,46 @@
+<app-chat-crud [chatId]="SelectedChatId" (closeModal)="OnModalClose()" />
+
+<div class="main">
+  <app-header-content [title]="'Chats'">
+    <button class="add-button" (click)="Crud(0, 'Cadastrar')">
+      Adicionar chat
+    </button>
+  </app-header-content>
+  <div class="chat-container">
+    <ul class="chat-list">
+      <li
+        *ngFor="let chat of chats"
+        (click)="onSelectChat(chat)"
+        class="chat-item"
+        [style.backgroundColor]="chat.id === activeChatId ? chat.color : ''"
+        [style]="'border: 2px solid ' + chat.color"
+      >
+        <div>
+          <div class="tag" [style.backgroundColor]="chat.color"></div>
+          <span class="chat-name">
+            {{ chat.name }}
+          </span>
+        </div>
+        <div>
+          <div class="action-btn-wrapper">
+            <button class="action-bnt" (click)="Crud(chat.id!, 'Editar')">
+              <span class="material-icons">edit</span>
+            </button>
+            <span class="tooltip">Editar</span>
+          </div>
+
+          <div
+            *ngIf="Token.role == 'Administrador' || Token.role == 'Gerente'"
+            class="action-btn-wrapper"
+          >
+            <button class="action-bnt" (click)="Remove(chat.id!)">
+              <span class="material-icons">delete</span>
+            </button>
+            <span class="tooltip">Deletar</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-chat-messages [chat]="selectedChat!"></app-chat-messages>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+}
+
+.titles-home {
+  padding: 12px;
+  border-radius: 10px;
+  flex: 1;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.titles-home h2 {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.titles-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f15353;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 12px;
+  justify-content: space-around;
+}
+
+.card {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1;
+  background-color: #fff;
+  border-left: 8px;
+  border-left-color: #f15353;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  border-left: 16px solid #f15353;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.card-data {
+  margin: 1rem 0;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 12px;
+  justify-content: space-around;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.chart {
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1;
+  background-color: #fff;
+}
+
+.chart-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.chart-container {
+  flex: 1;
+  margin: 12px 0;
+}
+
+.pie-chart-container {
+  flex: 1;
+  margin: 12px 0;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .charts {
+    flex-direction: column;
+  }
+  .pie-chart-container {
+    min-width: 150px;
+    height: 150px;
+  }
+}

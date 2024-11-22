@@ -1,0 +1,133 @@
+.main-auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  background: linear-gradient(-45deg, #8f4d39, #7a0101, #9b3a22, #b42727);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  width: 100%;
+  height: 100vh; /* Ajuste para ocupar a altura da viewport */
+}
+
+.content-auth {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 16px; /* Aumentado para mais espaço entre os elementos */
+  border-radius: 1rem;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Fundo branco com transparência */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+}
+
+.content-auth h1 {
+  text-align: center;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600; /* Aumentado para mais ênfase */
+  font-size: 2.5rem; /* Diminuído um pouco */
+  margin: 1rem 0;
+  color: #f15353;
+}
+
+.content-auth img {
+  height: 80px;
+  margin: 0 auto; /* Centraliza a imagem */
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.form-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Aumentado para mais espaço entre os campos do formulário */
+  padding: 16px 2rem; /* Reduzido o padding lateral */
+  width: 100%;
+  height: 100%;
+}
+
+.form-auth a {
+  margin-bottom: 1rem;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: none; /* Removido borda padrão */
+  border-radius: 10px; /* Bordas mais arredondadas */
+  background-color: #ffffff; /* Fundo branco */
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem; /* Ajustado para um tamanho de fonte melhor */
+  color: #333; /* Cor mais escura para contraste */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500; /* Tornar o texto do rótulo mais forte */
+  color: #555; /* Cor mais escura para contraste */
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 50vw;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border 0.3s; /* Suaviza a transição da borda */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #b42727; /* Borda verde ao focar */
+  outline: none; /* Remove a borda padrão */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #b42727;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer; /* Cursor de ponteiro para indicar que é clicável */
+  transition: background-color 0.3s; /* Transição suave para o hover */
+}
+
+button:hover {
+  background-color: #8f4d39; /* Escurece a cor do botão ao passar o mouse */
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}

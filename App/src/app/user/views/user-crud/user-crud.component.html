@@ -1,0 +1,181 @@
+<app-modal-crud [title]="action() + ' Usuário'">
+  <form [formGroup]="userService.basicForm">
+    <app-tabs>
+      <app-tab title="Principal">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Digite o nome do usuário"
+              [ngClass]="{
+                'is-invalid':
+                  userService.basicForm.controls['name'].invalid &&
+                  userService.basicForm.controls['name'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                userService.basicForm.controls['name'].invalid &&
+                userService.basicForm.controls['name'].touched
+              "
+              class="error-message"
+            >
+              O nome é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="Digite o E-Mail do usuário"
+              [ngClass]="{
+                'is-invalid':
+                  userService.basicForm.controls['email'].invalid &&
+                  userService.basicForm.controls['email'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                userService.basicForm.controls['email'].invalid &&
+                userService.basicForm.controls['email'].touched
+              "
+              class="error-message"
+            >
+              O E-mail é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="roleId">
+              Cargo
+              {{
+                userService.basicForm.controls["roleId"].validator ? "*" : ""
+              }}
+            </label>
+            <select id="roleId" formControlName="roleId">
+              <option [value]="0">-- Selecione uma opção --</option>
+              <option *ngFor="let roles of Roles" [value]="roles.id">
+                {{ roles.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                userService.basicForm.controls['roleId'].invalid &&
+                userService.basicForm.controls['roleId'].touched
+              "
+              class="error-message"
+            >
+              A Cargo é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              placeholder="Digite uma senha para o usuário"
+              [ngClass]="{
+                'is-invalid':
+                  userService.basicForm.controls['password'].invalid &&
+                  userService.basicForm.controls['password'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                userService.basicForm.controls['password'].invalid &&
+                userService.basicForm.controls['password'].touched
+              "
+              class="error-message"
+            >
+              A senha é obrigatória.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">Confirmar Senha</label>
+            <input
+              id="newPassword"
+              type="password"
+              formControlName="newPassword"
+              placeholder="Confirme a senha"
+              [ngClass]="{
+                'is-invalid':
+                  userService.basicForm.controls['newPassword'].invalid &&
+                  userService.basicForm.controls['newPassword'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                userService.basicForm.controls['newPassword'].invalid &&
+                userService.basicForm.controls['newPassword'].touched
+              "
+              class="error-message"
+            >
+              É necessário fazer a confirmação da senha.
+            </div>
+            <div
+              *ngIf="
+                userService.basicForm.controls['password'].value !==
+                userService.basicForm.controls['newPassword'].value
+              "
+              class="error-message"
+            >
+              As senhas estão diferentes.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="color">
+              Cor
+              {{ userService.basicForm.controls["color"].validator ? "*" : "" }}
+            </label>
+            <input
+              id="color"
+              type="color"
+              formControlName="color"
+              [ngClass]="{
+                'is-invalid':
+                  userService.basicForm.controls['color'].invalid &&
+                  userService.basicForm.controls['color'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                userService.basicForm.controls['color'].invalid &&
+                userService.basicForm.controls['color'].touched
+              "
+              class="error-message"
+            >
+              A cor é obrigatória.
+            </div>
+          </div>
+        </div>
+      </app-tab>
+    </app-tabs>
+  </form>
+  <div class="form-actions">
+    <button type="button" (click)="onCancel()">Cancelar</button>
+    <button
+      type="submit"
+      [disabled]="
+        userService.basicForm.invalid &&
+        userService.basicForm.controls['password'].value ==
+          userService.basicForm.controls['name'].value
+      "
+      (click)="ngOnSubmit()"
+    >
+      {{ action() }}
+    </button>
+  </div>
+</app-modal-crud>

@@ -1,0 +1,134 @@
+<app-project-crud
+  [projectId]="SelectedProjectId"
+  (closeModal)="OnModalClose()"
+/>
+
+<div class="main">
+  <app-header-content [title]="'Projetos'"
+    ><app-dropdown [title]="'Filtro'">
+      <div class="filter-group">
+        <label for="completedFilter">Status:</label>
+        <select
+          id="completedFilter"
+          [(ngModel)]="SelectedStatus"
+          (change)="ApplyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option value="completed">Concluídas</option>
+          <option value="pending">Pendentes</option>
+          <option value="dueSoon">Vencendo em Breve</option>
+          <option value="overdue">Vencidas</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="dueDateFilter">Data:</label>
+        <input
+          type="date"
+          id="dueDateFilter"
+          [(ngModel)]="SelectedDueDate"
+          (change)="ApplyFilters()"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="monthFilter">Mês:</label>
+        <select
+          id="monthFilter"
+          [(ngModel)]="SelectedMonth"
+          (change)="ApplyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option *ngFor="let month of Months" [value]="month">
+            {{ month }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="yearFilter">Ano:</label>
+        <select
+          id="yearFilter"
+          [(ngModel)]="SelectedYear"
+          (change)="ApplyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option *ngFor="let year of Years" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+      <button (click)="ResetFilters()" class="filters-button">
+        Limpar Filtros
+      </button>
+    </app-dropdown>
+    <button
+      class="add-button"
+      *ngIf="Token.role == 'Administrador' || Token.role == 'Gerente'"
+      (click)="Crud(0, 'Cadastrar')"
+    >
+      Adicionar Projeto
+    </button>
+  </app-header-content>
+
+  <app-paginador-list
+    [lista]="PaginatedProjects"
+    [propriedades]="['Titulo', 'Status', 'Inicio', 'Fim', 'Tarefas']"
+    [itensPorPagina]="ItemsPerPage"
+    [acoesTemplate]="acoes"
+    [nextPageFunction]="NextPage"
+    [prevPageFunction]="PrevPage"
+    [totalPaginas]="TotalPages"
+    [paginaAtual]="CurrentPage"
+  >
+  </app-paginador-list>
+  <ng-template #acoes let-item="item">
+    <div class="action-btn-wrapper">
+      <button
+        class="action-bnt"
+        [routerLink]="['/task', item.Id, 'calendario']"
+      >
+        <span class="material-icons">calendar_month</span>
+      </button>
+      <span class="tooltip">Calendário</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" [routerLink]="['/task', item.Id, 'kanban']">
+        <span class="material-icons">view_kanban</span>
+      </button>
+      <span class="tooltip">Kanban</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" [routerLink]="['/task', item.Id, 'list']">
+        <span class="material-icons">list</span>
+      </button>
+      <span class="tooltip">Lista</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="Crud(item.Id, 'Visualizar')">
+        <span class="material-icons">visibility</span>
+      </button>
+      <span class="tooltip">Visualizar</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="Crud(item.Id, 'Editar')">
+        <span class="material-icons">edit</span>
+      </button>
+      <span class="tooltip">Editar</span>
+    </div>
+
+    <div
+      *ngIf="Token.role == 'Administrador' || Token.role == 'Gerente'"
+      class="action-btn-wrapper"
+    >
+      <button class="action-bnt" (click)="Remove(item.Id)">
+        <span class="material-icons">delete</span>
+      </button>
+      <span class="tooltip">Deletar</span>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,43 @@
+<app-team-crud [teamId]="selectedTeamId" (closeModal)="onModalClose()" />
+
+<div class="main">
+  <app-header-content [title]="'Equipes'">
+    <button class="add-button" (click)="crud(0, 'Cadastrar')">
+      Adicionar Projeto
+    </button>
+  </app-header-content>
+
+  <app-paginador-list
+    [lista]="paginatedTeams"
+    [propriedades]="['Titulo', 'Usuarios']"
+    [itensPorPagina]="itemsPerPage"
+    [acoesTemplate]="acoes"
+    [nextPageFunction]="nextPage"
+    [prevPageFunction]="prevPage"
+    [totalPaginas]="totalPages"
+    [paginaAtual]="currentPage"
+  >
+  </app-paginador-list>
+  <ng-template #acoes let-item="item">
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="crud(item.Id, 'Visualizar')">
+        <span class="material-icons">visibility</span>
+      </button>
+      <span class="tooltip">Visualizar</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="crud(item.Id, 'Editar')">
+        <span class="material-icons">edit</span>
+      </button>
+      <span class="tooltip">Editar</span>
+    </div>
+
+    <div class="action-btn-wrapper">
+      <button class="action-bnt" (click)="remove(item.Id)">
+        <span class="material-icons">delete</span>
+      </button>
+      <span class="tooltip">Deletar</span>
+    </div>
+  </ng-template>
+</div>

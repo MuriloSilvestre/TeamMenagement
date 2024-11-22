@@ -1,0 +1,92 @@
+<div class="dashboard">
+  <div class="titles-home">
+    <h2 class="titles-title">Projetos</h2>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3 class="card-title">Projetos Total</h3>
+      <p class="card-data">{{ totalProjects }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Projetos Pendentes</h3>
+      <p class="card-data">{{ pendingProjects }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Tarefas Completas</h3>
+      <p class="card-data">{{ completedTasks }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Tarefas Pendentes</h3>
+      <p class="card-data">{{ pendingTasks }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Porcentagem Tarefas Completas</h3>
+      <p class="card-data">{{ completionRate }}%</p>
+    </div>
+  </div>
+  <div class="charts">
+    <div class="chart">
+      <h3 class="chart-title">Projetos Total</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="totalProjectsChart"></canvas>
+      </div>
+    </div>
+    <div class="chart">
+      <h3 class="chart-title">Projetos Equipes</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="projectsByTeamChart"></canvas>
+      </div>
+    </div>
+    <div class="chart">
+      <h3 class="chart-title">Tarefas Projetos</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="tasksByProjectChart"></canvas>
+      </div>
+    </div>
+    <div class="chart">
+      <h3 class="chart-title">Tarefas Total</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="totalTasksChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="titles-home">
+    <h2 class="titles-title">Equipes</h2>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3 class="card-title">Equipes Total</h3>
+      <p class="card-data">{{ totalTeam }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Media Conclusão Equipe</h3>
+      <p class="card-data">{{ completedTasksTeam }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Media Pendentes Equipe</h3>
+      <p class="card-data">{{ pendingTasksTeam }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Media Conclusão Membro</h3>
+      <p class="card-data">{{ completedTasksMembers }}</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Media Pendentes Membro</h3>
+      <p class="card-data">{{ pendingTasksMembers }}</p>
+    </div>
+  </div>
+  <div class="charts">
+    <div class="chart">
+      <h3 class="chart-title">Desempenho das Equipes</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="teamPerformanceChart"></canvas>
+      </div>
+    </div>
+    <div class="chart">
+      <h3 class="chart-title">Desempenho Individual dos Membros</h3>
+      <div class="chart-container pie-chart-container">
+        <canvas id="memberPerformanceChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

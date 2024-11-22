@@ -1,0 +1,52 @@
+dialog {
+  min-width: 30rem;
+  z-index: 2;
+  background: #ebebeb; /* Cor mais clara para suavizar o visual */
+  border-radius: 12px; /* Bordas arredondadas mais suaves */
+  overflow: hidden;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombras mais suaves e maiores */
+  animation: slide-down-fade-in 0.4s ease-out forwards; /* Animação um pouco mais lenta para suavidade */
+  border: transparent;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%); /* Centraliza o diálogo na tela */
+}
+
+.modal-content {
+  padding: 8px 0;
+}
+dialog::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Estilo do botão de fechar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes slide-down-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

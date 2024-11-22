@@ -1,0 +1,8 @@
+<dialog #dialog>
+  <app-header-content [title]="title">
+    <button class="close-button" (click)="close()">×</button>
+  </app-header-content>
+  <div class="modal-content">
+    <ng-content />
+  </div>
+</dialog>

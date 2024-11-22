@@ -1,0 +1,80 @@
+<header class="header background-black">
+  <div class="logo" [routerLink]="['/home']">
+    <div class="nome">
+      <h1 class="font-silver">Dashboard</h1>
+    </div>
+  </div>
+
+  <div class="profile">
+    <app-dropdown-header [title]="'Menu'" [icon]="'menu'">
+      <nav *ngIf="user.name !== undefined">
+        <button [routerLink]="['/project']" routerLinkActive="active">
+          <span class="material-icons">create_new_folder</span>
+          Projetos
+        </button>
+
+        <button [routerLink]="['/task', 0, 'list']" routerLinkActive="active">
+          <span class="material-icons">task</span>
+          Tarefas
+        </button>
+
+        <button
+          *ngIf="user.role == 'Administrador' || user.role == 'Gerente'"
+          [routerLink]="['/team']"
+          routerLinkActive="active"
+        >
+          <span class="material-icons">groups</span>
+          Equipes
+        </button>
+
+        <button
+          *ngIf="user.role == 'Administrador' || user.role == 'Gerente'"
+          [routerLink]="['/user']"
+          routerLinkActive="active"
+        >
+          <span class="material-icons">person</span>
+          Usuários
+        </button>
+
+        <button
+          *ngIf="user.role == 'Administrador' || user.role == 'Gerente'"
+          [routerLink]="['/config']"
+          routerLinkActive="active"
+        >
+          <span class="material-icons">settings</span>
+          Configurações
+        </button>
+
+        <button [disabled]="router.url == '/home'" (click)="back()">
+          <span class="material-icons">arrow_back_ios</span>
+          Voltar
+        </button>
+
+        <button *ngIf="user.name !== undefined" (click)="logout()">
+          <span class="material-icons">logout</span> Sair
+        </button>
+      </nav>
+    </app-dropdown-header>
+    <button
+      style="width: 24px"
+      [routerLink]="['/chat']"
+      routerLinkActive="active"
+    >
+      <span class="material-icons">forum</span>
+    </button>
+    <h2
+      *ngIf="user.name !== undefined"
+      class="font-white"
+      [routerLink]="['/profile']"
+    >
+      Ola {{ user.name }}!
+    </h2>
+    <h2
+      *ngIf="user.name === undefined"
+      class="font-white"
+      [routerLink]="['/auth']"
+    >
+      Logar
+    </h2>
+  </div>
+</header>

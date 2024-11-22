@@ -1,0 +1,403 @@
+<app-modal-crud [title]="action() + ' Projeto'">
+  <form [formGroup]="projectService.basicForm">
+    <app-tabs>
+      <app-tab title="Principal">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">
+              Título
+              {{
+                projectService.basicForm.controls["title"].validator ? "*" : ""
+              }}
+            </label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Digite o título da Projeto"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['title'].invalid &&
+                  projectService.basicForm.controls['title'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['title'].invalid &&
+                projectService.basicForm.controls['title'].touched
+              "
+              class="error-message"
+            >
+              O título é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group" style="width: 18%">
+            <label for="isCompleted">
+              Status
+              {{
+                projectService.basicForm.controls["isCompleted"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <select
+              id="isCompleted"
+              [(ngModel)]="IsCompleted"
+              formControlName="isCompleted"
+            >
+              <option [value]="''">-- Selecione uma opção --</option>
+              <option [value]="false">Pendente</option>
+              <option [value]="true">Concluída</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="budget">
+              Valor Orçamento
+              {{
+                projectService.basicForm.controls["budget"].validator ? "*" : ""
+              }}
+            </label>
+            <input
+              id="budget"
+              type="text"
+              formControlName="budget"
+              placeholder="Digite o Valor Orçamento"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['budget'].invalid &&
+                  projectService.basicForm.controls['budget'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['budget'].invalid &&
+                projectService.basicForm.controls['budget'].touched
+              "
+              class="error-message"
+            >
+              O Valor Orçamento é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="actualCost">
+              Custo Real
+              {{
+                projectService.basicForm.controls["actualCost"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <input
+              id="actualCost"
+              type="text"
+              formControlName="actualCost"
+              placeholder="Digite o Custo Real"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['actualCost'].invalid &&
+                  projectService.basicForm.controls['actualCost'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['actualCost'].invalid &&
+                projectService.basicForm.controls['actualCost'].touched
+              "
+              class="error-message"
+            >
+              O Custo Real é obrigatório.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="priority">
+              Prioridade
+              {{
+                projectService.basicForm.controls["priority"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <select id="priority" formControlName="priority">
+              <option [value]="null">-- Selecione uma opção --</option>
+              <option [value]="'Baixa'">Baixa</option>
+              <option [value]="'Média'">Média</option>
+              <option [value]="'Alta'">Alta</option>
+            </select>
+            <div
+              *ngIf="
+                projectService.basicForm.controls['priority'].invalid &&
+                projectService.basicForm.controls['priority'].touched
+              "
+              class="error-message"
+            >
+              A Prioridade é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startDate">
+              Prevista Data de Ínicio
+              {{
+                projectService.basicForm.controls["startDate"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <input
+              id="startDate"
+              type="date"
+              formControlName="startDate"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['startDate'].invalid &&
+                  projectService.basicForm.controls['startDate'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['startDate'].invalid &&
+                projectService.basicForm.controls['startDate'].touched
+              "
+              class="error-message"
+            >
+              A data de Ínicio é obrigatória.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="endDate">
+              Prevista Data de Conclusão
+              {{
+                projectService.basicForm.controls["endDate"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <input
+              id="endDate"
+              type="date"
+              formControlName="endDate"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['endDate'].invalid &&
+                  projectService.basicForm.controls['endDate'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['endDate'].invalid &&
+                projectService.basicForm.controls['endDate'].touched
+              "
+              class="error-message"
+            >
+              A data de Conclusão é obrigatória.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="actualStartDate">
+              Data de Ínicio Oficial
+              {{
+                projectService.basicForm.controls["actualStartDate"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <input
+              id="actualStartDate"
+              type="date"
+              formControlName="actualStartDate"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['actualStartDate']
+                    .invalid &&
+                  projectService.basicForm.controls['actualStartDate'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['actualStartDate'].invalid &&
+                projectService.basicForm.controls['actualStartDate'].touched
+              "
+              class="error-message"
+            >
+              A data de Ínicio é obrigatória.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="actualEndDate">
+              Data de Conclusão Oficial
+              {{
+                projectService.basicForm.controls["actualEndDate"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <input
+              id="actualEndDate"
+              type="date"
+              formControlName="actualEndDate"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['actualEndDate'].invalid &&
+                  projectService.basicForm.controls['actualEndDate'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['actualEndDate'].invalid &&
+                projectService.basicForm.controls['actualEndDate'].touched
+              "
+              class="error-message"
+            >
+              A data de Conclusão é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="color">
+              Cor
+              {{
+                projectService.basicForm.controls["color"].validator ? "*" : ""
+              }}
+            </label>
+            <input
+              id="color"
+              type="color"
+              formControlName="color"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['color'].invalid &&
+                  projectService.basicForm.controls['color'].touched
+              }"
+            />
+            <div
+              *ngIf="
+                projectService.basicForm.controls['color'].invalid &&
+                projectService.basicForm.controls['color'].touched
+              "
+              class="error-message"
+            >
+              A cor é obrigatória.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">
+              Descrição
+              {{
+                projectService.basicForm.controls["description"].validator
+                  ? "*"
+                  : ""
+              }}
+            </label>
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Digite a descrição da tarefa"
+              [ngClass]="{
+                'is-invalid':
+                  projectService.basicForm.controls['description'].invalid &&
+                  projectService.basicForm.controls['description'].touched
+              }"
+            ></textarea>
+            <div
+              *ngIf="
+                projectService.basicForm.controls['description'].invalid &&
+                projectService.basicForm.controls['description'].touched
+              "
+              class="error-message"
+            >
+              A descrição é obrigatória.
+            </div>
+          </div>
+        </div>
+      </app-tab>
+      <app-tab title="Status" *ngIf="projectId > 0">
+        <div class="form-row">
+          <div class="form-group" style="width: 18%">
+            <label for="statusId"> Status* </label>
+            <select
+              id="statusId"
+              [(ngModel)]="statusId"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="addStatus()"
+            >
+              <option [value]="0">-- Selecione uma opção --</option>
+              <option *ngFor="let stato of status" [value]="stato.id">
+                {{ stato.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <app-list
+          [lista]="paginatedStatus"
+          [propriedades]="['Titulo']"
+          [acoesTemplate]="acoes"
+        >
+        </app-list>
+        <ng-template #acoes let-item="item">
+          <div class="action-btn-wrapper">
+            <button class="action-bnt" (click)="onDeleteStatus(item.Id)">
+              <span class="material-icons">delete</span>
+            </button>
+            <span class="tooltip">Deletar</span>
+          </div>
+        </ng-template>
+      </app-tab>
+
+      <app-tab title="Equipes" *ngIf="projectId > 0">
+        <div class="form-row">
+          <div class="form-group" style="width: 18%">
+            <label for="teamId"> Equipes* </label>
+            <select
+              id="teamId"
+              [(ngModel)]="teamId"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="addEquipe()"
+            >
+              <option [value]="0">-- Selecione uma opção --</option>
+              <option *ngFor="let team of teams" [value]="team.id">
+                {{ team.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <app-list
+          [lista]="paginatedProjects"
+          [propriedades]="['Titulo']"
+          [acoesTemplate]="acoes"
+        >
+        </app-list>
+        <ng-template #acoes let-item="item">
+          <div class="action-btn-wrapper">
+            <button class="action-bnt" (click)="onDeleteTeam(item.Id)">
+              <span class="material-icons">delete</span>
+            </button>
+            <span class="tooltip">Deletar</span>
+          </div>
+        </ng-template>
+      </app-tab>
+    </app-tabs>
+  </form>
+  <div class="form-actions">
+    <button type="button" (click)="onCancel()">Cancelar</button>
+    <button
+      type="submit"
+      [disabled]="projectService.basicForm.invalid || action() == 'Visualizar'"
+      (click)="ngOnSubmit()"
+    >
+      {{ action() }}
+    </button>
+  </div>
+</app-modal-crud>

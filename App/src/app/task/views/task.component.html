@@ -1,0 +1,151 @@
+<app-task-crud
+  [taskId]="selectedTaskId"
+  [projectId]="+projectId"
+  (closeModal)="onModalClose()"
+/>
+
+<div class="main">
+  <app-header-content [title]="'Tarefas'"
+    ><app-dropdown [title]="'Filtro'">
+      <div class="filter-group">
+        <label for="completedFilter">Status:</label>
+        <select
+          id="completedFilter"
+          [(ngModel)]="selectedStatus"
+          (change)="applyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option value="completed">Concluídas</option>
+          <option value="pending">Pendentes</option>
+          <option value="dueSoon">Vencendo em Breve</option>
+          <option value="overdue">Vencidas</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="dueDateFilter">Data:</label>
+        <input
+          type="date"
+          id="dueDateFilter"
+          [(ngModel)]="selectedDueDate"
+          (change)="applyFilters()"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="monthFilter">Mês:</label>
+        <select
+          id="monthFilter"
+          [(ngModel)]="selectedMonth"
+          (change)="applyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option *ngFor="let month of months" [value]="month">
+            {{ month }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="yearFilter">Ano:</label>
+        <select
+          id="yearFilter"
+          [(ngModel)]="selectedYear"
+          (change)="applyFilters()"
+        >
+          <option value="all">Todos</option>
+          <option *ngFor="let year of years" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+      <button (click)="resetFilters()" class="filters-button">
+        Limpar Filtros
+      </button>
+    </app-dropdown>
+    <button
+      class="add-button"
+      *ngIf="
+        (token.role == 'Administrador' || token.role == 'Gerente') &&
+        projectId != '0'
+      "
+      (click)="crud(0, 'Cadastrar')"
+    >
+      Adicionar Tarefa
+    </button>
+  </app-header-content>
+  <div *ngIf="viewType == 'calendario'">
+    <app-calendar [events]="calendarTasks"> </app-calendar>
+    <ng-template #actionTemplate>
+      <button class="action-bnt" (click)="crud(0, 'Cadastrar')">
+        <span class="material-icons">add</span>
+      </button>
+    </ng-template>
+  </div>
+  <div *ngIf="viewType == 'kanban'">
+    <app-kanban-board
+      [columns]="kanbanColumns"
+      [acoesTemplate]="acoes"
+      (itemMoved)="onItemMoved($event)"
+    >
+    </app-kanban-board>
+    <ng-template #acoes let-item="item">
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="crud(item.id, 'Visualizar')">
+          <span class="material-icons">visibility</span>
+        </button>
+        <span class="tooltip">Visualizar</span>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="crud(item.id, 'Editar')">
+          <span class="material-icons">edit</span>
+        </button>
+        <span class="tooltip">Editar</span>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="remove(item.id)">
+          <span class="material-icons">delete</span>
+        </button>
+        <span class="tooltip">Deletar</span>
+      </div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="viewType == 'list'">
+    <app-paginador-list
+      [lista]="paginatedTask"
+      [propriedades]="['Titulo', 'Status', 'Fim']"
+      [itensPorPagina]="itemsPerPage"
+      [acoesTemplate]="acoes"
+      [nextPageFunction]="nextPage"
+      [prevPageFunction]="prevPage"
+      [totalPaginas]="totalPages"
+      [paginaAtual]="currentPage"
+    >
+    </app-paginador-list>
+    <ng-template #acoes let-item="item">
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="crud(item.Id, 'Visualizar')">
+          <span class="material-icons">visibility</span>
+        </button>
+        <span class="tooltip">Visualizar</span>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="crud(item.Id, 'Editar')">
+          <span class="material-icons">edit</span>
+        </button>
+        <span class="tooltip">Editar</span>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <button class="action-bnt" (click)="remove(item.Id)">
+          <span class="material-icons">delete</span>
+        </button>
+        <span class="tooltip">Deletar</span>
+      </div>
+    </ng-template>
+  </div>
+</div>

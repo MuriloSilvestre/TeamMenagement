@@ -1,0 +1,10 @@
+<div class="dropdown-header">
+  <button (click)="toggleDropdown()" class="dropdown-header-toggle">
+    <span class="material-icons">{{ icon }}</span>
+    {{ title }}
+  </button>
+
+  <div *ngIf="isOpen" class="dropdown-header-menu" (click)="closeDropdown()">
+    <ng-content></ng-content>
+  </div>
+</div>
