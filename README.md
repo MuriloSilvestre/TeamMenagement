@@ -1,75 +1,92 @@
-Sistema de Gerenciamento de Projetos com Times
-Um sistema completo para gerenciar projetos, equipes e tarefas, com funcionalidades avançadas, como chat em tempo real, kanban e notificações, utilizando as mais modernas tecnologias.
+# 📋 Sistema de Gerenciamento de Projetos com Times
 
-Tecnologias Utilizadas
-Frontend
-Angular
-Angular CDK (Drag and Drop)
-Angular Signals
-Chart.js (ou ng2-charts) para gráficos
-Backend
-C# (ASP.NET Core)
-SignalR para atualizações em tempo real
-Banco de Dados
-SQL Server
-Funcionalidades Principais
-Gestão de Usuários:
+Bem-vindo ao Sistema de Gerenciamento de Projetos com Times! Este sistema permite criar equipes, gerenciar tarefas, acompanhar o progresso dos projetos e colaborar em tempo real. O projeto é dividido em API (backend .NET) e App (frontend Angular).
 
-Personalização de perfis.
-Gestão de Projetos e Equipes:
+---
 
-Relacionamento muitos-para-muitos entre usuários e equipes.
-Kanban para acompanhamento visual.
-Priorização e definição de status.
-Gestão de Tarefas:
+## 🗂 Estrutura do Projeto
 
-Sistema de tags para organização.
-Histórico de alterações (log de atividades).
-Filtros avançados por status, data e prioridade.
-Funcionalidades em Tempo Real:
+O projeto está organizado da seguinte forma:
 
-Chat integrado por equipe e projeto.
-Notificações para atualizações importantes.
-Relatórios e Gráficos:
+```bash
+|-- api/     # Backend (API em .NET Core)
+|-- app/     # Frontend (Aplicação em Angular)
+```
 
-Painéis interativos com métricas detalhadas.
-Gráficos de desempenho e progresso.
-Extras:
+## 🚀 Funcionalidades
 
-Exportação de relatórios.
-Sistema de permissões avançadas.
-Log de atividades por usuário.
-Instalação e Configuração
-Pré-requisitos
-Node.js
-.NET SDK
-SQL Server
-Instruções
-Backend
-Clone o repositório: ``` git clone https://github.com/suarepositorio.git cd api ```
-Configure a string de conexão no arquivo appsettings.json.
-Restaure os pacotes e execute as migrações: ``` dotnet restore dotnet ef database update ```
-Inicie a aplicação: ``` dotnet run ```
-Frontend
-Instale as dependências do Angular: ``` cd app npm install ```
-Execute o projeto: ``` ng serve ```
-Rotas Importantes
-Backend
-GET /api/projects: Lista de projetos.
-POST /api/projects: Criação de projetos.
-GET /api/teams: Lista de equipes.
-POST /api/tasks: Criação de tarefas.
-GET /api/chat: Recupera mensagens de chat.
-Frontend
-/dashboard: Painel principal com gráficos e relatórios.
-/projects: Gestão de projetos.
-/teams: Gestão de equipes.
-/tasks: Kanban e tarefas.
-/chat: Chat em tempo real.
-Contribuindo
-Faça um fork do repositório.
-Crie um branch para sua feature: ``` git checkout -b minha-feature ```
-Envie suas alterações: ``` git push origin minha-feature ```
-Licença
-Este projeto está licenciado sob a MIT License.
+### 🔧 API (Backend)
+-Autenticação JWT com níveis de permissão:
+ -- Admin: Acesso total.
+ -- Auditor: Permissões gerais de cadastro e edição.
+ -- User: Permissões limitadas aos seus próprios registros.
+- Relacionamentos complexos entre usuários, equipes e projetos.
+- Sistema de notificações em tempo real usando SignalR.
+- Histórico de alterações e logs de atividades.
+- Kanban com atualização em tempo real.
+
+### 🌐 App (Frontend)
+- Interface intuitiva e responsiva para gerenciar equipes, projetos e tarefas.
+- Painel com gráficos e relatórios detalhados.
+- Sistema de kanban para organização visual das tarefas.
+- Chat integrado para comunicação em tempo real.
+- Filtros avançados e sistema de tags para organização de tarefas.
+
+---
+
+## 💻 Como Executar o Projeto
+
+### 1. Clonar o Repositório
+
+```bash
+git clone https://github.com/MuriloSilvestre/ToDoApp.git
+cd ToDoApp
+```
+
+### 2. Executando a API
+
+```bash
+cd api
+dotnet restore
+dotnet run
+```
+
+- A API estará disponível em `http://localhost:37923`
+
+### 3. Executando o App
+
+```bash
+cd app
+npm install
+ng serve
+```
+
+- O App estará disponível em `http://localhost:4200`
+
+---
+
+## 🔗 Endpoints da API
+
+Alguns dos principais endpoints disponíveis:
+
+- **POST** `/api/login` - Autenticação de usuário
+- **GET** `/api/users` - Lista de usuários
+- **GET** `/api/projects` -  Lista de projetos(com filtros)
+- **POST** `/api/tasks` - Criar novo projeto
+- **GET** `/api/tasks` - Lista de tarefas (com filtros)
+- **POST** `/api/tasks` - Criar nova tarefa
+- **PUT** `/api/tasks/{id}` - Atualizar tarefa
+- **POST** `/api/chat` - Enviar mensagens no chat
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+- **Backend**: ASP.NET Core, Entity Framework Core
+- **Frontend**: Angular, Angular CDK, Chart.js (ou ng2-charts)
+- **Banco de Dados**: SQL Server
+
+---
+
+Feito com ❤️ por [Murilo Silvestre](https://github.com/MuriloSilvestre)
 
